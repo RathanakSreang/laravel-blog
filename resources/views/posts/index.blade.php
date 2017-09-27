@@ -1,5 +1,7 @@
 @extends('layout.application')
 
 @section('content')
-dddd
+  @foreach ($posts as $post)
+    @include ('posts.post')
+  @endforeach
 @endsection

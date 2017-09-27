@@ -10,7 +10,9 @@ class PostsController extends Controller
 {
   public function index()
   {
-    return view('posts.index');
+    $posts = Post::all();
+
+    return view('posts.index', compact('posts'));
   }
 
   public function create()
@@ -19,6 +21,11 @@ class PostsController extends Controller
   }
   public function store()
   {
+    $this->validate(request(), [
+      'title' => 'required|unique:posts|max:255|min:2',
+      'body' => 'required'
+    ]);
+
     // create the new post
     // 1
     // $post = new \App\Post;
@@ -33,5 +40,10 @@ class PostsController extends Controller
     ]);
 
     return redirect('/');
+  }
+
+  public function show(Post $post)
+  {
+    return view('posts.show', compact('post'));
   }
 }

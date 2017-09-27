@@ -5,6 +5,12 @@
   <hr>
   <form method="POST" action="/posts">
     {{ csrf_field() }}
+    <ul>
+      @foreach ($errors->all() as $error)
+        {{-- expr --}}
+        <li>{{$error}}</li>
+      @endforeach
+    </ul>
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">title</label>
     <div class="col-sm-10">
